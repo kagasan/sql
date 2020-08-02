@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="ja">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- font awesome -->
+    <script src="https://kit.fontawesome.com/4043559c10.js" crossorigin="anonymous"></script>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <!-- Self CSS -->
+    <link rel="stylesheet" href="style.css">
+
+    <title>SQL Starter</title>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+        <a class="navbar-brand" href="#">
+            <i class="fas fa-running"></i>
+            SQL Starter
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div class="navbar-nav">
+                <a class="nav-item nav-link" href="#gene-div">データベース作成</a>
+                <a class="nav-item nav-link" href="#inst-div">MySQLの導入とか</a>
+                <a class="nav-item nav-link" href="#about-div">このページについて</a>
+            </div>
+        </div>
+      </nav>
+
+    <div class="container py-3" id="gene-div">
+        <h2>データベース作成</h2>
+        <div class="form-group form-inline">
+            <label for="db-name">databese名</label>
+            <input type="text" id="db-name" class="form-control" value="sample_database">
+        </div>
+
+        <div class="py-3">
+            <p>
+                <button type="button" class="btn btn-sm btn-primary" id="table-minus"><i class="fas fa-minus"></i></button>
+                <span id="table_count">テーブル：1</span>
+                <button type="button" class="btn btn-sm btn-primary" id="table-plus"><i class="fas fa-plus"></i></button>
+            </p>
+            <div id="tables">
+
+            </div>
+        </div>
+
+        <button type="button" class="btn btn-primary" id="generate">コード生成</button>
+        <div class="form-group pt-3">
+            <label for="result-delete">データベース削除コード</label>
+            <button type="button" class="btn btn-secondary btn-sm btn-clipboard" id="delete-copy" data-clipboard-target="#result-delete">コピー</button>
+            <span id="delete-copy-message"></span>
+            <textarea id="result-delete" class="form-control"></textarea>
+        </div>
+        <div class="form-group pt-1">
+            <label for="result-create">データベース作成コード</label>
+            <button type="button" class="btn btn-secondary btn-sm btn-clipboard" id="create-copy" data-clipboard-target="#result-create">コピー</button>
+            <span id="create-copy-message"></span>
+            <textarea id="result-create" class="form-control"></textarea>
+        </div>
+        <h4>カラム一致検証コード</h4>
+        <ul class="list-group" id="check-list">
+            <li class="list-group-item">
+                <h5>カラムが一致するテーブルを見つけてJOIN句を作成します。</h5>
+                <code id="check-1"></code>
+                <button type="button" class="btn btn-secondary btn-sm btn-clipboard code-copy" data-clipboard-target="#check-1">コピー</button>
+                <span></span>
+            </li>
+        </ul>
+    </div>
+
+    <div class="container py-3" id="inst-div">
+        <h2>MySQLの導入とか</h2>
+        インストール済みの場合は3から！
+        <ul class="list-group">
+            <li class="list-group-item">
+                <h5>1. Homebrewの確認</h5>
+                <code id="code-1">brew --version</code>
+                <button type="button" class="btn btn-secondary btn-sm btn-clipboard code-copy" data-clipboard-target="#code-1">コピー</button>
+                <span></span>
+                <br>確認できない場合は<a href="https://brew.sh/index_ja.html" target="_blank">コチラ</a>
+            </li>
+            <li class="list-group-item">
+                <h5>2. インストール</h5>
+                <code id="code-2">brew install mysql</code>
+                <button type="button" class="btn btn-secondary btn-sm btn-clipboard code-copy" data-clipboard-target="#code-2">コピー</button>
+                <span></span>
+            </li>
+            <li class="list-group-item">
+                <h5>3. mysqlサーバーの起動</h5>
+                <code id="code-3">mysql.server start</code>
+                <button type="button" class="btn btn-secondary btn-sm btn-clipboard code-copy" data-clipboard-target="#code-3">コピー</button>
+                <span></span>
+            </li>
+            <li class="list-group-item">
+                <h5>4. mysqlサーバーにログイン</h5>
+                <code id="code-4">mysql -uroot</code>
+                <button type="button" class="btn btn-secondary btn-sm btn-clipboard code-copy" data-clipboard-target="#code-4">コピー</button>
+                <span></span>
+                <br>（ユーザ設定などが必要なら各自で...）
+            </li>
+            <li class="list-group-item">
+                <h5>5. ログアウト</h5>
+                <code id="code-5">quit</code>
+                <button type="button" class="btn btn-secondary btn-sm btn-clipboard code-copy" data-clipboard-target="#code-5">コピー</button>
+                <span></span>
+            </li>
+            <li class="list-group-item">
+                <h5>6. mysqlサーバーの停止</h5>
+                <code id="code-6">mysql.server stop</code>
+                <button type="button" class="btn btn-secondary btn-sm btn-clipboard code-copy" data-clipboard-target="#code-6">コピー</button>
+                <span></span>
+            </li>
+        </ul>
+    </div>
+
+    <div class="container py-3" id="about-div">
+        <h2>このページについて</h2>
+        kagaがSQLをいろいろ試す過程で生まれたページです。
+    </div>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+    <!-- clipboard.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js"></script>
+
+    <!-- Self Script -->
+    <script src="script.js"></script>
+</body>
+</html>
